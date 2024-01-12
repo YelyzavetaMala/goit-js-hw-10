@@ -1,7 +1,8 @@
+import izitoast from "izitoast";
+import "izitoast/dist/css/izitoast.min.css";
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import iziToast from "iziToast";
-import "iziToast/dist/css/iziToast.min.css";
+
 
 const options = {
   enableTime: true,
@@ -73,7 +74,7 @@ document.querySelector("[data-start]").addEventListener("click", () => {
   const timeDifference = userSelectedDate - new Date();
 
   if (timeDifference <= 0) {
-    iziToast.error({
+    izitoast.error({
       title: "Error",
       message: "Please choose a date in the future",
     });
@@ -90,7 +91,7 @@ document.querySelector("[data-start]").addEventListener("click", () => {
 
     if (timeDifference <= 0) {
       clearInterval(countdownInterval);
-      iziToast.success({
+      izitoast.success({
         title: "Success",
         message: "Countdown has ended!",
       });

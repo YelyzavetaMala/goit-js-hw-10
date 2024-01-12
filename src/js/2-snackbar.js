@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import izitoast from "izitoast";
+import "izitoast/dist/css/izitoast.min.css";
 
 document.addEventListener("DOMContentLoaded", function () {
   const delayInput = document.querySelector("[name='delay']");
@@ -32,13 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     promise
       .then((delay) => {
-        iziToast.success({
+        izitoast.success({
           title: "Success",
           message: `✅ Fulfilled promise in ${delay}ms`,
         });
       })
       .catch((delay) => {
-        iziToast.error({
+        izitoast.error({
           title: "Error",
           message: `❌ Rejected promise in ${delay}ms`,
         });
