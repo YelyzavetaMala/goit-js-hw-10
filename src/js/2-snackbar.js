@@ -1,7 +1,5 @@
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.min.css";
-import izitoast from "izitoast";
-import "izitoast/dist/css/izitoast.min.css";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 document.addEventListener("DOMContentLoaded", function () {
   const delayInput = document.querySelector("[name='delay']");
