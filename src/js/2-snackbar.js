@@ -1,45 +1,39 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
-document.addEventListener("DOMContentLoaded", function () {
-  const delayInput = document.querySelector("[name='delay']");
-  const stateRadios = document.querySelectorAll("[name='state']");
   const form = document.querySelector(".form");
+   
+    
+  form.addEventListener('submit', this.onSubmit)
+    
+  function onSubmit(e) {
+    e.preventDefault();
+    const { state, delay } = form.elements;
+    const selectedState = Array.from(state).find(radio => radio.checked);
 
-  flatpickr(delayInput, {
-    enableTime: false, 
-    dateFormat: "U", 
-    minDate: "today", 
-  });
+    getPromise(delay.value, selectedState.value)
+      .then((delay) => {
+        iziToast.success({
+          title: "Success",
+          message: `✅ Fulfilled promise in ${delay}ms`,
+        });
+      })
+      .catch((delay) => {
+        iziToast.error({
+          title: "Error",
+          message: `❌ Rejected promise in ${delay}ms`,
+        });
+      });
+  }
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-    const delay = delayInput.value;
-    const selectedState = Array.from(stateRadios).find(radio => radio.checked);
-
-    const promise = new Promise((resolve, reject) => {
+  function getPromise(delay, selectedState) {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (selectedState.value === "fulfilled") {
+        if (selectedState === "fulfilled") {
           resolve(delay);
         } else {
           reject(delay);
         }
       }, delay);
     });
-
-    promise
-      .then((delay) => {
-        izitoast.success({
-          title: "Success",
-          message: `✅ Fulfilled promise in ${delay}ms`,
-        });
-      })
-      .catch((delay) => {
-        izitoast.error({
-          title: "Error",
-          message: `❌ Rejected promise in ${delay}ms`,
-        });
-      });
-  });
-});
+  }
