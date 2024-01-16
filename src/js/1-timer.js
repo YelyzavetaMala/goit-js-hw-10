@@ -10,7 +10,7 @@ const spanHours = document.querySelector('[data-hours]');
 const spanMinutes = document.querySelector('[data-minutes]');
 const spanSeconds = document.querySelector('[data-seconds]');
 let timeDifference = 0;
-
+let countdownInterval;
 
 const options = {
   enableTime: true,
@@ -67,13 +67,13 @@ function updateTimer(ms) {
   spanSeconds.textContent = addLeadingZero(seconds);
 }
 
-let countdownInterval;
 
 btnEl.addEventListener("click", () => {
-  timeDifference = new Date(inputEl.value).getTime() - new Date();
-  console.log(timeDifference);
+  const selectedDate = new Date(inputEl.value).getTime();
+  const currentTime = new Date().getTime();
+  timeDifference = selectedDate - currentTime;
   if (timeDifference <= 0) {
-    izitoast.error({
+    iziToast.error({
       title: "Error",
       message: "Please choose a date in the future",
     });
@@ -90,7 +90,7 @@ btnEl.addEventListener("click", () => {
 
     if (timeDifference <= 0) {
       clearInterval(countdownInterval);
-      izitoast.success({
+      iziToast.success({
         title: "Success",
         message: "Countdown has ended!",
       });

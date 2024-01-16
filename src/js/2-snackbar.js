@@ -4,7 +4,7 @@ import "izitoast/dist/css/iziToast.min.css";
   const form = document.querySelector(".form");
    
     
-  form.addEventListener('submit', this.onSubmit)
+  form.addEventListener('submit', onSubmit)
     
   function onSubmit(e) {
     e.preventDefault();
